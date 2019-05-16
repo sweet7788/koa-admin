@@ -1,0 +1,11 @@
+extends ../layout
+
+block content
+    table
+        - var songList = _songList.split(' ').map(ele=>{return JSON.parse(ele)})
+        each val,key in songList[0]
+            th= key
+        each song in songList
+            tr 
+            each val,key in song
+                td= val
