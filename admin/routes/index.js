@@ -3,7 +3,7 @@ const pool = require('../model/connection')
 
 router.get('/', async (ctx, next) => {
   await ctx.render('login/index', {
-    title: 'Hello Koa 2!'
+    // title: 'Hello Koa 2!'
   })
 })
 
