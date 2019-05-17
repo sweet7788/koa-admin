@@ -202,20 +202,24 @@ var introContainer = $('.intro-container');
 var skyContainer = $('.sky-container');
 var xMark = $('.x-mark');
 
-$('.shift-camera-button').click(function () {
+$('.shift-camera-button').click(enter_animation);
+
+$('.x-mark').click(exit_animation);
+
+function enter_animation(){
 	var introTimeline = new TimelineMax();
 
 	introTimeline.add([TweenLite.fromTo(introContainer, 0.5, { opacity: 1 }, { opacity: 0, ease: Power3.easeIn }), TweenLite.to(camera.rotation, 3, { x: Math.PI / 2, ease: Power3.easeInOut }), TweenLite.to(camera.position, 2.5, { z: 20, ease: Power3.easeInOut }), TweenLite.to(camera.position, 3, { y: 120, ease: Power3.easeInOut }), TweenLite.to(plane.scale, 3, { x: 2, ease: Power3.easeInOut })]);
 
 	introTimeline.add([TweenLite.to(xMark, 2, { opacity: 1, ease: Power3.easeInOut }), TweenLite.to(skyContainer, 2, { opacity: 1, ease: Power3.easeInOut })]);
-});
 
-$('.x-mark').click(function () {
+}
+function exit_animation(){
 	var outroTimeline = new TimelineMax();
 
 	outroTimeline.add([TweenLite.to(xMark, 0.5, { opacity: 0, ease: Power3.easeInOut }), TweenLite.to(skyContainer, 0.5, { opacity: 0, ease: Power3.easeInOut }), TweenLite.to(camera.rotation, 3, { x: 0, ease: Power3.easeInOut }), TweenLite.to(camera.position, 3, { z: 50, ease: Power3.easeInOut }), TweenLite.to(camera.position, 2.5, { y: 0, ease: Power3.easeInOut }), TweenLite.to(plane.scale, 3, { x: 1, ease: Power3.easeInOut })]);
 
 	outroTimeline.add([TweenLite.to(introContainer, 0.5, { opacity: 1, ease: Power3.easeIn })]);
-});
 
+}
 render();
