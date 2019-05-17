@@ -4,14 +4,54 @@ block css
   link(rel="stylesheet", href="./stylesheets/login/index.css")
 
 block content
-  div(class="wrapper")
-    form(action="/login"  method="post")
-      div 
-        span 用户名 
-        input(type="text" name="id")
-      div
-        span 密码 
-        input(type="password" name="psw")
-      button(type="submit" class="btn btn-success") 登录
-
+  //- div(class="wrapper")
+  //-   form(action="/login"  method="post")
+  //-     div 
+  //-       span 用户名 
+  //-       input(type="text" name="id")
+  //-     div
+  //-       span 密码 
+  //-       input(type="password" name="psw")
+  //-     button(type="submit" class="btn btn-success") 登录
+  <div class="x-mark">
+    <div class="container">
+      <div class="left"></div>
+      <div class="right"></div>
+    </div>
+  </div>
+  <div class="intro-container">
+    <h1>ONE WITH AN EVERLASTING DESIRE <br> FOR THE UNKNOWN & UNTOLD</h1>
+    <div class="button shift-camera-button">
+      <div class="border">
+        <div class="left-plane"></div>
+        <div class="right-plane"></div>
+      </div>	
+      <div class="text">To The Stars</div>
+    </div>
+  </div>
+  <div class="sky-container">
+    <div class="text-right sky-container__left">
+      <h2 class="portfolio">
+        //- PORTFOLIO
+      </h2>
+      <h2 class="resurrection">
+        //- resurrection	
+      </h2>
+    </div>
+    <div class="text-left sky-container__right">
+      <h2 class="08">
+        08
+      </h2>
+      <h2 class="thirty-one">
+        31
+      </h2>
+      <h2 class="2016">
+        2016
+      </h2>
+    </div>
+  </div>
 block js
+  script(src="/javascripts/jquery.min.js")
+  script(src="/javascripts/TweenMax.min.js")
+  script(src="/javascripts/three.min.js")
+  script(src="/javascripts/login.js")
