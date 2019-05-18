@@ -207,6 +207,7 @@ $('.shift-camera-button').click(enter_animation);
 $('.x-mark').click(exit_animation);
 
 function enter_animation(){
+	//登陆
 	var introTimeline = new TimelineMax();
 
 	introTimeline.add([TweenLite.fromTo(introContainer, 0.5, { opacity: 1 }, { opacity: 0, ease: Power3.easeIn }), TweenLite.to(camera.rotation, 3, { x: Math.PI / 2, ease: Power3.easeInOut }), TweenLite.to(camera.position, 2.5, { z: 20, ease: Power3.easeInOut }), TweenLite.to(camera.position, 3, { y: 120, ease: Power3.easeInOut }), TweenLite.to(plane.scale, 3, { x: 2, ease: Power3.easeInOut })]);

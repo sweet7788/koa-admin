@@ -9,6 +9,7 @@ const index = require('./routes/index')
 
 const koaBody = require('koa-body')
 const session =require('koa-session2')
+
 // error handler
 onerror(app)
 app.keys = ['some secret hurr'];

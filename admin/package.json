@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "concurrently \"node bin/www\" \" stylus -w public/stylesheets/*\"",
+    "start": "concurrently \" stylus -w /public/stylesheets *\" \"node bin/www\" ",
     "dev": "./node_modules/.bin/nodemon bin/www",
     "prd": "pm2 start bin/www",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "concurrently": "^4.1.0",
     "debug": "^2.6.3",
     "koa": "^2.2.0",
     "koa-body": "^4.0.6",
@@ -23,9 +24,10 @@
     "koa-static": "^3.0.0",
     "koa-views": "^5.2.1",
     "layui": "^0.0.1",
-    "node-sass": "^4.12.0",
     "promise-mysql": "^3.3.1",
-    "pug": "^2.0.0-rc.1"
+    "pug": "^2.0.0-rc.1",
+    "stylus": "^0.54.5",
+    "webpack-hot-middleware": "^2.25.0"
   },
   "devDependencies": {
     "nodemon": "^1.8.1"

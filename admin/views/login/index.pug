@@ -18,11 +18,20 @@ block content
       div(class="left")
       div(class="right")
   div(class="intro-container")
-    div(class="button shift-camera-button")
-      div(class="border")
-        div(class="left-plane")
-        div(class="right-plane")
-      div(class="text") 登陆
+    form(class='layui-form')
+      div(class='layui-form-item')
+        label(class="layui-form-label") 账号
+        div(class="layui-input-block")
+          input(type="text" class="layui-input" placeholder="用户名")
+      div(class='layui-form-item')
+        label(class="layui-form-label") 密码
+        div(class="layui-input-block")
+          input(class="layui-input" type="password" placeholder="密码")
+      div(class="button shift-camera-button")
+        div(class="border")
+          div(class="left-plane")
+          div(class="right-plane")
+        div(class="text") 登陆
   div(class="sky-container")
     div(class="text-right sky-container__left")
       h2(class="portfolio")

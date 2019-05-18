@@ -12,6 +12,8 @@ body {
   margin: 0 auto;
   right: 0;
   left: 0;
+  display: flex;
+  justify-content: center;
 }
 h1 {
   font-family: 'brandon-grotesque', sans-serif;
@@ -218,4 +220,7 @@ h1 {
   bottom: 7px;
   left: 7px;
   color: #e62117;
+}
+form {
+  width: 40%;
 }
