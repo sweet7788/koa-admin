@@ -22,11 +22,11 @@ block content
       div(class='layui-form-item')
         label(class="layui-form-label") 账号
         div(class="layui-input-block")
-          input(type="text" class="layui-input" placeholder="用户名")
+          input(type="text" class="layui-input" placeholder="用户名" name="username")
       div(class='layui-form-item')
         label(class="layui-form-label") 密码
         div(class="layui-input-block")
-          input(class="layui-input" type="password" placeholder="密码")
+          input(class="layui-input" type="password" placeholder="密码" name="password")
       div(class="button shift-camera-button")
         div(class="border")
           div(class="left-plane")
@@ -39,7 +39,7 @@ block content
       h2(class="resurrection")
         //- resurrection	
     div(class="text-left sky-container__right")
-      div 登陆成功
+      div msg
 block js
   script(src="/javascripts/jquery.min.js")
   script(src="/javascripts/TweenMax.min.js")

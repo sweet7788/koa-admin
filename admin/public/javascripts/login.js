@@ -202,7 +202,10 @@ var introContainer = $('.intro-container');
 var skyContainer = $('.sky-container');
 var xMark = $('.x-mark');
 
-$('.shift-camera-button').click(enter_animation);
+$('.shift-camera-button').click(function(){
+	loginReq()
+	enter_animation()
+});
 
 $('.x-mark').click(exit_animation);
 
@@ -224,3 +227,21 @@ function exit_animation(){
 
 }
 render();
+
+
+function loginReq() {
+	$.ajax({
+		url:'/login',
+		type:'post',
+		data:$('form').serialize(),
+		success: function(res) {
+			$('.sky-container__right').html(res.msg)
+			if(res.status){
+				window.localStorage.tooken = res.data.tooken
+				setTimeout(() => {
+					window.location.href="/main"
+				},5000);
+			}
+		}
+	})
+}
