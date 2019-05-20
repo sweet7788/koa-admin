@@ -1,4 +1,24 @@
 extends ../layout
 
 block content
-    div #{hello}
+    div
+        ul(class="layui-nav layui-nav-tree")
+            li(class="layui-nav-item layui-nav-itemed")
+                a(href="#") 默认展开
+                dl(class="layui-nav-child")
+                    dd 
+                        a(href="#") 选项一
+                    dd 
+                        a(href="#") 选项二
+            li(class="layui-nav-item layui-nav-itemed")
+                a(href="#") 默认展开
+                dl(class="layui-nav-child")
+                    dd 
+                        a(href="#") 选项一
+                    dd 
+                        a(href="#") 选项二
+            li(class="layui-nav-item layui-nav-itemed")
+                a(href="#") 产品
+    block tree_content
+block js
+    script(src="/javascripts/main/index.js")

@@ -22,7 +22,6 @@ router.post('/login', async (ctx, next) =>{
   // console.log(id)
   var psw = ctx.request.body.password;
   var res = await pool.query(`select * from user where userName = '${username}'`)
-  console.log(res)
   res.length ? (res[0].password === psw ? 
     res = {
        msg:'登录成功',
@@ -62,7 +61,7 @@ router.get('/main', async (ctx, next) =>{
       title: 'aaa'
     })
   }else{
-    await ctx.render('main/index',{
+    await ctx.render('main/order_in',{
       hello : "helloword"
     })
   }
