@@ -1,15 +1,17 @@
 extends ../layout
 
 block content
-    div
+    div(class="d-flex")
         ul(class="layui-nav layui-nav-tree")
             li(class="layui-nav-item layui-nav-itemed")
-                a(href="#") 默认展开
+                a(href="#") 账单管理
                 dl(class="layui-nav-child")
                     dd 
-                        a(href="#") 选项一
+                        a(href="#") 进账管理
                     dd 
-                        a(href="#") 选项二
+                        a(href="#") 出账管理
+                    dd
+                        a(href="#") aaa
             li(class="layui-nav-item layui-nav-itemed")
                 a(href="#") 默认展开
                 dl(class="layui-nav-child")
@@ -19,6 +21,6 @@ block content
                         a(href="#") 选项二
             li(class="layui-nav-item layui-nav-itemed")
                 a(href="#") 产品
-    block tree_content
+        block tree_content
 block js
     script(src="/javascripts/main/index.js")
