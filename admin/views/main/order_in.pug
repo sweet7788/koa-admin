@@ -12,12 +12,14 @@ block tree_content
                     th 昵称
                     th 加入时间
                     th 签名
+                    th 操作
             tbody
-                tr
-                    td 贤心
-                    td 2016-11-29
-                    td 人生就像是一场修行
-                tr
-                    td 许闲心
-                    td 2016-11-28
-                    td 于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…
+                each ele,ind in orderList
+                    tr
+                        each item in ele
+                            td= item
+
+                        td 
+                            a(href="#") 修改
+                            a(href="#") 删除
+            
