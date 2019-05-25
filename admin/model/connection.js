@@ -7,6 +7,8 @@ var pool = mysql.createPool({
     database: config.database,
     connectionLimit: config.connectionLimit
 });
+var a = 1
+console.log(++a)
 
 module.exports = pool;
 
