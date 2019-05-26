@@ -7,6 +7,7 @@ layui.use('element', function(){
     // });
     
 });
+
 layui.use('table', function(){
   var table = layui.table;
   window.table = table
@@ -17,53 +18,121 @@ layui.use('table', function(){
     ,url: '/main/orderInto' //数据接口
     ,method: 'post'
     ,page: true //开启分页
+    ,toolbar: 'default'
+    ,defaultToolbar:[
+      'filter', 'exports','point'
+    ]
     ,cols: [[ //表头
        {type:'checkbox'}
       ,{field: 'id', title: 'ID', width:80, sort: true,}
-      ,{field: 'username', title: '用户名', width:80}
-      ,{field: 'sex', title: '性别', width:80, sort: true}
-      ,{field: 'city', title: '城市', width:80} 
-      ,{field: 'sign', title: '签名', width: 177}
-      ,{field: 'experience', title: '积分', width: 80, sort: true}
-      ,{field: 'score', title: '评分', width: 80, sort: true}
-      ,{field: 'option', title: '操作', width: 80 }
+      ,{field: 'name', title: '订单名称', width:100}
+      ,{field: 'createtime', title: '创建时间', width:100, sort: true}
+      ,{field: 'finished', title: '是否结束', width:100,text:{
+        none:'123',
+        '1':'123'
+      }} 
+      ,{field: 'finishtime', title: '结束时间', width: 177}
+      ,{field: 'profit', title: '盈利', width: 100, sort: true}
+      ,{field: 'type', title: '类型', width: 100, sort: true}
     ]]
     ,done:function(){
-        layui.use('layer',function (params) {
-          var layer = layui.layer
-          
-          $('[data-target="update_table"]').on('click',function(){
-            layer.open({
-              type:1,
-              title:'add',
-              area:['80vw','80vh'],
-              content:`
-              <table class="layui-table" style="width:500px">
-                <thead>
-                  <tr>
-                    <th>昵称</th>
-                    <th>加入时间</th>
-                    <th>签名</th>
-                  </tr> 
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>贤心</td>
-                    <td>2016-11-29</td>
-                    <td>人生就像是一场修行</td>
-                  </tr>
-                  <tr>
-                    <td>许闲心</td>
-                    <td>2016-11-28</td>
-                    <td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>
-                  </tr>
-                </tbody>
-              </table>
-              `
-            })
-          })
-      })
+       
     }
   });
-
+  table.on('toolbar(orderInto)', function(obj){
+    switch(obj.event){
+      case 'add':
+        layer.msg('添加');
+      break;
+      case 'delete':
+        layer.msg('删除');
+        console.log(table.checkStatus('demo'))
+      break;
+      case 'update':
+        // layer.msg('编辑');
+      break;
+    };
+  });
+  table.on('row(orderInto)', function(obj){ //注：edit是固定事件名，test是table原始容器的属性 lay-filter="对应的值"
+    console.log(obj.data); //所在行的所有相关数据  
+    layui.use('layer',function (params) {
+        var layer = layui.layer
+      
+          layer.open({
+            type:1,
+            title:'add',
+            area:['80vw','80vh'],
+            content:`
+            <form class="layui-form" action="" lay-filter="test1">
+            <div class="layui-form-item">
+              <label class="layui-form-label">输入框</label>
+              <div class="layui-input-block">
+                <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">密码框</label>
+              <div class="layui-input-inline">
+                <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+              </div>
+              <div class="layui-form-mid layui-word-aux">辅助文字</div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">选择框</label>
+              <div class="layui-input-block">
+                <select name="city" lay-verify="required">
+                  <option value=""></option>
+                  <option value="0">北京</option>
+                  <option value="1">上海</option>
+                  <option value="2">广州</option>
+                  <option value="3">深圳</option>
+                  <option value="4">杭州</option>
+                </select>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">复选框</label>
+              <div class="layui-input-block">
+                <input type="checkbox" name="like[write]" title="写作">
+                <input type="checkbox" name="like[read]" title="阅读" checked>
+                <input type="checkbox" name="like[dai]" title="发呆">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">开关</label>
+              <div class="layui-input-block">
+                <input type="checkbox" name="switch" lay-skin="switch">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">单选框</label>
+              <div class="layui-input-block">
+                <input type="radio" name="sex" value="男" title="男">
+                <input type="radio" name="sex" value="女" title="女" checked>
+              </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+              <label class="layui-form-label">文本域</label>
+              <div class="layui-input-block">
+                <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+              </div>
+            </div>
+          </form>
+            `,
+            success: function() {
+              console.log('aaa')
+              layui.use('form',function() {
+                var form = layui.form;
+                form.render()
+              })
+            }
+          })
+    })
+  });
 });
