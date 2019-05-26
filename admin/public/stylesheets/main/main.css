@@ -6,3 +6,6 @@
   display: inline-block;
   vertical-align: top;
 }
+a {
+  cursor: pointer;
+}

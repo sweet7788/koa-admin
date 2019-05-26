@@ -1,5 +1,7 @@
 extends ../layout
 
+block css
+    link(rel="stylesheet", href="/stylesheets/main/main.css")
 block content
     div(class="d-flex")
         ul(class="layui-nav layui-nav-tree")
@@ -7,9 +9,9 @@ block content
                 a(href="#") 账单管理
                 dl(class="layui-nav-child")
                     dd 
-                        a(href="main/orderInto") 进账管理
+                        a(href="orderInto" class=pathname=="orderInto"?'layui-this':'') 进账管理
                     dd 
-                        a(href="main/orderOut") 出账管理
+                        a(href="orderOut" class=pathname=="orderOut"?'layui-this':'') 出账管理
                     dd
                         a(href="#") aaa
             li(class="layui-nav-item layui-nav-itemed")

@@ -2,24 +2,5 @@ extends ./index
 
 block tree_content
     div(class="tree_content")
-        table(class="layui-table")
-            colgroup
-                col(width="150")
-                col(width="200")
-                col
-            thead
-                tr
-                    th 昵称
-                    th 加入时间
-                    th 签名
-                    th 操作
-            tbody
-                each ele,ind in orderList
-                    tr
-                        each item in ele
-                            td= item
-
-                        td 
-                            a(href="#") 修改
-                            a(href="#") 删除
+        table(id="demo" lay-filter="test")
             
