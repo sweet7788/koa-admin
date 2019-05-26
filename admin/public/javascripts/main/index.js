@@ -17,6 +17,15 @@ layui.use('table', function(){
     ,height: 312
     ,url: '/main/orderInto' //数据接口
     ,method: 'post'
+    ,parseData:function(res) {
+        console.log(res)
+        return {
+          code:0,
+          msg:'',
+          data:res.data,
+          count:res.data
+        }
+    }
     ,page: true //开启分页
     ,toolbar: 'default'
     ,defaultToolbar:[
