@@ -1,14 +1,7 @@
-layui.use('element', function(){
-    var element = layui.element;
-    
-    //一些事件监听
-    // element.on('tab(demo)', function(data){
-    //   console.log(data);
-    // });
-    
-});
-
-layui.use('table', function(){
+layui.use('element');
+layui.use('layer')
+layui.use('laydate');
+layui.use('table',function(){
   var table = layui.table;
   window.table = table
   //第一个实例
@@ -19,6 +12,28 @@ layui.use('table', function(){
     ,method: 'post'
     ,parseData:function(res) {
         console.log(res)
+        res.data = res.data.map((ele,ind)=>{
+          switch(ele.type){
+            case 0 :
+            case '0':
+              ele.type = '进账'
+            case 1 :
+            case '1':
+              ele.type = '出账'
+            case 2 :
+            case '2':
+              ele.type = '记账'
+          }
+          ele.createtime ? ele.createtime = formatDate(ele.createtime,"YYYY-MM-DD") : ''
+          ele.finishtime ? ele.finishtime = formatDate(ele.finishtime,"YYYY-MM-DD") : ''
+          switch(ele.finished){
+            case 0 : 
+              ele.finished = '否'
+            case 1 : 
+              ele.finished = '是'
+          }
+          return ele
+        })
         return {
           code:0,
           msg:'',
@@ -64,84 +79,88 @@ layui.use('table', function(){
   });
   table.on('row(orderInto)', function(obj){ //注：edit是固定事件名，test是table原始容器的属性 lay-filter="对应的值"
     console.log(obj.data); //所在行的所有相关数据  
-    layui.use('layer',function (params) {
+    
         var layer = layui.layer
       
-          layer.open({
-            type:1,
-            title:'add',
-            area:['80vw','80vh'],
-            content:`
-            <form class="layui-form" action="" lay-filter="test1">
-            <div class="layui-form-item">
-              <label class="layui-form-label">输入框</label>
-              <div class="layui-input-block">
-                <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+        layer.open({
+          type:1,
+          title:'修改订单',
+          area:['80vw','80vh'],
+          content: `
+            <form class="layui-form mt-4">
+              <div class="d-flex justify-content-center">
+                <div class="layui-form-item w-40">
+                  <label class="layui-form-label">名称</label>
+                  <div class="layui-input-block">
+                    <input type="text" value=${obj.data.name} name="name" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                  </div>
+                </div>
+                <div class="layui-form-item w-40">
+                  <label class="layui-form-label">创建时间</label>
+                  <div class="layui-input-block">
+                    <input type="text" class="layui-input" name="createtime" value="${formatDate(obj.data.createtime,"YYYY-MM-DD")}" data-target="datepicker">
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="layui-form-item">
-              <label class="layui-form-label">密码框</label>
-              <div class="layui-input-inline">
-                <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+              <div class="d-flex justify-content-center">
+                <div class="layui-form-item w-40">
+                  <label class="layui-form-label">创建状态</label>
+                  <div class="layui-input-block">
+                    <input type="text" value=${obj.data.finished} name="finished" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                  </div>
+                </div>
+                <div class="layui-form-item w-40">
+                  <label class="layui-form-label">完成时间</label>
+                  <div class="layui-input-block">
+                    <input type="text" class="layui-input" name="finishtime" value="${formatDate(obj.data.finishtime,"YYYY-MM-DD")}" data-target="datepicker1">
+                  </div>
+                </div>
               </div>
-              <div class="layui-form-mid layui-word-aux">辅助文字</div>
-            </div>
-            <div class="layui-form-item">
-              <label class="layui-form-label">选择框</label>
-              <div class="layui-input-block">
-                <select name="city" lay-verify="required">
-                  <option value=""></option>
-                  <option value="0">北京</option>
-                  <option value="1">上海</option>
-                  <option value="2">广州</option>
-                  <option value="3">深圳</option>
-                  <option value="4">杭州</option>
-                </select>
+              <div class="d-flex justify-content-center">
+                <div class="layui-form-item w-40">
+                  <label class="layui-form-label">订单利润</label>
+                  <div class="layui-input-block">
+                    <input type="text" value=${obj.data.profit} name="profit" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                  </div>
+                </div>
+                <div class="layui-form-item w-40">
+                  <label class="layui-form-label">订单类型</label>
+                  <div class="layui-input-block">
+                    <input type="text" value=${obj.data.type} name="type" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="layui-form-item">
-              <label class="layui-form-label">复选框</label>
-              <div class="layui-input-block">
-                <input type="checkbox" name="like[write]" title="写作">
-                <input type="checkbox" name="like[read]" title="阅读" checked>
-                <input type="checkbox" name="like[dai]" title="发呆">
+              <div class="d-flex justify-content-center">
+                <div class="layui-form-item">
+                  <div class="layui-input-block">
+                    <button class="layui-btn px-5" lay-submit lay-filter="formDemo">确认</button>
+                  </div>
+                </div>
+                <div class="layui-form-item">
+                  <div class="layui-input-block">
+                    <button type="reset" class="layui-btn px-5 layui-btn-primary">重置</button>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="layui-form-item">
-              <label class="layui-form-label">开关</label>
-              <div class="layui-input-block">
-                <input type="checkbox" name="switch" lay-skin="switch">
-              </div>
-            </div>
-            <div class="layui-form-item">
-              <label class="layui-form-label">单选框</label>
-              <div class="layui-input-block">
-                <input type="radio" name="sex" value="男" title="男">
-                <input type="radio" name="sex" value="女" title="女" checked>
-              </div>
-            </div>
-            <div class="layui-form-item layui-form-text">
-              <label class="layui-form-label">文本域</label>
-              <div class="layui-input-block">
-                <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
-              </div>
-            </div>
-            <div class="layui-form-item">
-              <div class="layui-input-block">
-                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-              </div>
-            </div>
-          </form>
-            `,
-            success: function() {
-              console.log('aaa')
-              layui.use('form',function() {
-                var form = layui.form;
-                form.render()
+            </form>
+          `,
+          success: function() {
+            layui.use('form',function() {
+              var form = layui.form;
+              form.render()
+              layui.laydate.render({
+                elem: '[name="createtime"]',
+                value: obj.data.createtime
               })
-            }
-          })
-    })
+              layui.laydate.render({
+                elem: '[name="finishtime"]',
+                value: obj.data.finishtime
+              })
+            })
+          }
+        })
   });
-});
+})
+
+
+  
