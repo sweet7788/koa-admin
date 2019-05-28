@@ -9,7 +9,7 @@ layui.use('table',function(){
   //第一个实例
   table.render({
     elem: '#demo'
-    ,height: 312
+    ,height: window.innerHeight-50
     ,url: '/main/orderInto' //数据接口
     ,method: 'post'
     ,parseData:function(res) {
@@ -45,7 +45,7 @@ layui.use('table',function(){
           code:0,
           msg:'',
           data:res.data,
-          count:res.data
+          count:res.count
         }
     }
     ,page: true //开启分页
@@ -100,7 +100,7 @@ layui.use('table',function(){
           <div class="layui-form-item w-40">
             <label class="layui-form-label">创建时间</label>
             <div class="layui-input-block">
-              <input type="text" class="layui-input" name="createtime" data-target="datepicker">
+              <input type="text" class="layui-input" name="createtime" data-target="datepicker" autocomplete="off">
             </div>
           </div>
         </div>
@@ -115,7 +115,7 @@ layui.use('table',function(){
           <div class="layui-form-item w-40">
             <label class="layui-form-label">完成时间</label>
             <div class="layui-input-block">
-              <input type="text" class="layui-input" name="finishtime" data-target="datepicker1">
+              <input type="text" class="layui-input" name="finishtime" data-target="datepicker1" autocomplete="off">
             </div>
           </div>
         </div>
@@ -160,8 +160,18 @@ layui.use('table',function(){
       </form>`},)
       break;
       case 'delete':
-        layer.msg('删除');
-        console.log(table.checkStatus('demo'))
+        var id = (table.checkStatus('demo').data.map(ele=>ele.id))
+        console.log(id)
+        $.ajax({
+          url:'/order/delete',
+          data:{
+            id:id
+          },
+          type:'post',
+          success: function() {
+            window.location.reload()
+          }
+        })
       break;
       case 'update':
         // layer.msg('编辑');
@@ -196,7 +206,7 @@ layui.use('table',function(){
                 <div class="layui-form-item w-40">
                   <label class="layui-form-label">创建时间</label>
                   <div class="layui-input-block">
-                    <input type="text" class="layui-input" name="createtime" value="${formatDate(obj.data.createtime,"YYYY-MM-DD")}" data-target="datepicker">
+                    <input type="text" class="layui-input" name="createtime" value="${formatDate(obj.data.createtime,"YYYY-MM-DD")}" autocomplete="off" data-target="datepicker">
                   </div>
                 </div>
               </div>
@@ -211,7 +221,7 @@ layui.use('table',function(){
                 <div class="layui-form-item w-40">
                   <label class="layui-form-label">完成时间</label>
                   <div class="layui-input-block">
-                    <input type="text" class="layui-input" name="finishtime" value="${formatDate(obj.data.finishtime,"YYYY-MM-DD")}" data-target="datepicker1">
+                    <input type="text" class="layui-input" name="finishtime" value="${formatDate(obj.data.finishtime,"YYYY-MM-DD")}" autocomplete="off" data-target="datepicker1">
                   </div>
                 </div>
               </div>

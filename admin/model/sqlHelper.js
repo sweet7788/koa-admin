@@ -182,7 +182,7 @@ SQLHelper.prototype.delete = async function (option) {
 
     for (var i in option.where) {
         sql2List.push('`' + i + '`=?');
-        dataList.push(where[i]);
+        dataList.push(option.where[i]);
     }
 
     sql2 = '(' + sql2List.join(' and ') + ')'
@@ -192,7 +192,23 @@ SQLHelper.prototype.delete = async function (option) {
 
     return results;
 }
+SQLHelper.prototype.deleteMore = async function (option) {
+    var sql1 = 'DELETE FROM ' + this.table + ' ';
+    var sql2 = '';
 
+    var sql2List = [];
+    for(var i in option.where){
+        sql2List.push('`' + i + '` in ('+option.where[i].join(',') + ')') 
+    }
+
+    sql2 = '(' + sql2List.join(' and ') + ')'
+    var sql = sql1 + 'where ' + sql2;
+
+    console.log(sql)
+    var results = await this.query(sql);
+
+    return results;
+}
 /**
  * @param {Object} option 
  * @param {Object} option.where

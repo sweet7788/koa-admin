@@ -87,5 +87,25 @@ module.exports = [
             })
             ctx.redirect('/main/orderInto')
         }
+    },
+    {   
+        name: '/order/delete',
+        type: 'post',
+        method: async(ctx,next)=>{
+            var param = ctx.request.body
+            console.log(param)
+            var res = await table_orders.deleteMore({
+                where:{
+                    id:param.id
+                }
+            })
+            ctx.body={
+                status:200,
+                data:{
+
+                },
+                msg:{}
+            }
+        }
     }
 ]
