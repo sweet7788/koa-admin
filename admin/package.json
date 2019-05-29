@@ -22,6 +22,7 @@
     "koa-router": "^7.1.1",
     "koa-session": "^5.10.1",
     "koa-session2": "^2.2.8",
+    "koa-sslify": "^4.0.3",
     "koa-static": "^3.0.0",
     "koa-views": "^5.2.1",
     "layui": "^0.0.1",
