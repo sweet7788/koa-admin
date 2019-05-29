@@ -1,8 +1,18 @@
 // var createform = require('../util/createform')
 layui.use('element');
 layui.use('layer')
-layui.use('laydate');
-layui.use('form')
+layui.use('laydate',function(){
+  layui.laydate.render({
+    elem: '[name="createtime"]',
+  })
+  layui.laydate.render({
+    elem: '[name="finishtime"]',
+  })
+});
+layui.use('form',function(){
+  var form = layui.form;
+  form.render()
+})
 layui.use('table',function(){
   var table = layui.table;
   window.table = table
@@ -77,14 +87,7 @@ layui.use('table',function(){
             area:['80vw','80vh'],
             success: function() {
               
-                // var form = layui.form;
-                // form.render()
-                // layui.laydate.render({
-                //   elem: '[name="createtime"]',
-                // })
-                // layui.laydate.render({
-                //   elem: '[name="finishtime"]',
-                // })
+                
             },
             content:$('.modal')
        },)
