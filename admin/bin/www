@@ -9,10 +9,13 @@ var debug = require('debug')('demo:server');
 var http = require('http');
 var https = require('https');
 var fs = require('fs');
+var path = require('path');
+
+const enforceHttps = require('koa-sslify');
 
 var options = {
-  key: fs.readFileSync('./2275727_www.demonshen.top.key'),
-  cert: fs.readFileSync('./2275727_www.demonshen.top.pem')
+  key: fs.readFileSync(path.dirname(__filename) + '/2275727_www.demonshen.top.key'),
+  cert: fs.readFileSync(path.dirname(__filename) + '/2275727_www.demonshen.top.pem')
 }
 
 /**
@@ -29,10 +32,14 @@ var port = normalizePort(process.env.PORT || '3000');
 var server = http.createServer(app.callback());
 
 
-https.createServer(options,app).listen(443);
+var httpServer = https.createServer(options,app.callback())
 /**
  * Listen on provided port, on all network interfaces.
  */
+
+httpServer.listen('443');
+httpServer.on('error', onError);
+httpServer.on('listening', onListening);
 
 server.listen(port);
 server.on('error', onError);
