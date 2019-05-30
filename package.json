@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "koa-log4": "^2.3.2"
+  }
+}
