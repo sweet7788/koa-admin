@@ -1,5 +1,9 @@
 # koa-admin
 
+username admin 
+
+password 123456
+
 create database with use success.sql
 
 config the sqlconfig in /admin/model/config.js
