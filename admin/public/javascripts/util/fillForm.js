@@ -8,7 +8,6 @@ $.extend({
         for(var key in data){
             $(`form input[name="${key}"]`).val(data[key])
             $(`form textarea[name="${key}"]`).text(data[key])
-
         }
     }
 })
