@@ -1,9 +1,3 @@
-    /**
- * 
- * author: Xiaofei Xie
- * create data : 2017.3.2
- * 
- */
 const dbPool = require('./connection')
 var SQLHelper = function (table) {
     this.table = table

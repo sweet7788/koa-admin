@@ -10,7 +10,7 @@ module.exports = [
         })
       }else{
         await ctx.redirect('/main',{
-            // _songList: res[0].songList
+
         })
       }
     }
@@ -27,7 +27,6 @@ module.exports = [
     type: 'post',
     method: async (ctx, next) =>{
       var username = ctx.request.body.username;
-      // console.log(id)
       var psw = ctx.request.body.password;
       var res = await pool.query(`select * from user where userName = '${username}'`)
       res.length ? (res[0].password === psw ? 
@@ -70,9 +69,6 @@ module.exports = [
           title: 'aaa'
         })
       }else{
-        // await ctx.render('main/order_in',{
-        //   hello : "helloword"
-        // })
         await ctx.redirect('/main/orderInto',{
           title: 'aaa'
         })
