@@ -11,7 +11,7 @@ $.extend({
             method,
             url
         })
-        $(`form input[type="text"],form textarea`).val('')
+        $(`form input[type="text"],form textarea`).text('')
         $(`form input[type="checkbox"]`).attr('checked',false)
         for(var key in data){
             
