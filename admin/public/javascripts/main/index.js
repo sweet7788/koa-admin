@@ -43,10 +43,10 @@ layui.use('table',function(){
           ele.finishtime ? ele.finishtime = formatDate(ele.finishtime,"YYYY-MM-DD") : ''
           switch(ele.finished){
             case 0 : 
-              ele.finished = '否'
+              ele.finished_text = '否'
               break;
             case 1 : 
-              ele.finished = '是'
+              ele.finished_text = '是'
               break;
           }
           return ele
@@ -68,7 +68,7 @@ layui.use('table',function(){
       // ,{field: 'id', title: 'ID', width:80, sort: true,}
       ,{field: 'name', title: '订单名称', width:100}
       ,{field: 'createtime', title: '创建时间', width:100, sort: true}
-      ,{field: 'finished', title: '是否结束', width:100} 
+      ,{field: 'finished_text', title: '是否结束', width:100} 
       ,{field: 'finishtime', title: '结束时间', width: 177, sort: true}
       ,{field: 'profit', title: '盈利', width: 100, sort: true}
       ,{field: 'type', title: '类型', width: 100, sort: true}
@@ -86,8 +86,11 @@ layui.use('table',function(){
             title:'添加订单',
             area:['80vw','80vh'],
             success: function() {
-              
-                
+                $.fillForm({
+                  data:{},
+                  url:'/order/add',
+
+                })
             },
             content:$('.modal')
        },)
@@ -120,89 +123,94 @@ layui.use('table',function(){
           type:1,
           title:'修改订单',
           area:['80vw','80vh'],
-          content:
-          `
-            <form class="layui-form mt-4" action="/order/update" method="post">
-              <input type="hidden" name="id" value="${obj.data.id}">
-              <div class="d-flex justify-content-center">
-                <div class="layui-form-item w-40">
-                  <label class="layui-form-label">名称</label>
-                  <div class="layui-input-block">
-                    <input type="text" value=${obj.data.name} name="name" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
-                  </div>
-                </div>
-                <div class="layui-form-item w-40">
-                  <label class="layui-form-label">创建时间</label>
-                  <div class="layui-input-block">
-                    <input type="text" class="layui-input" name="createtime" value="${formatDate(obj.data.createtime,"YYYY-MM-DD")}" autocomplete="off" data-target="datepicker">
-                  </div>
-                </div>
-              </div>
-              <div class="d-flex justify-content-center">
-                <div class="layui-form-item w-40">
-                  <label class="layui-form-label">创建状态</label>
-                  <div class="layui-input-block">
-                    <input type="radio" name="finished" value="1" title="是" ${obj.data.finished === '是' ? 'checked' : ''}>
-                    <input type="radio" name="finished" value="0" title="否" ${obj.data.finished === '否' ? 'checked' : ''}>
-                  </div>
-                </div>
-                <div class="layui-form-item w-40">
-                  <label class="layui-form-label">完成时间</label>
-                  <div class="layui-input-block">
-                    <input type="text" class="layui-input" name="finishtime" value="${formatDate(obj.data.finishtime,"YYYY-MM-DD")}" autocomplete="off" data-target="datepicker1">
-                  </div>
-                </div>
-              </div>
-              <div class="d-flex justify-content-center">
-                <div class="layui-form-item w-40">
-                  <label class="layui-form-label">订单利润</label>
-                  <div class="layui-input-block">
-                    <input type="text" value=${obj.data.profit} name="profit" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
-                  </div>
-                </div>
-                <div class="layui-form-item w-40">
-                  <label class="layui-form-label">订单类型</label>
-                  <div class="layui-input-block">
-                    <select name="type" lay-verify="">
-                      <option value="0" ${obj.data.type=="入账"?'selected':''}>入账</option>
-                      <option value="1" ${obj.data.type=="出账"?'selected':''}>出账</option>
-                      <option value="2" ${obj.data.type=="记账"?'selected':''}>记账</option>
-                    </select>     
-                  </div>
-                </div>
-              </div>
-              <div class="d-flex justify-content-center">
-                <div class="layui-form-item w-80">
-                  <label class="layui-form-label">备注</label>
-                  <div class="layui-input-block">
-                    <textarea name="remake" placeholder="请输入内容" class="layui-textarea">${obj.data.remake} </textarea>
-                  </div>
-                </div>
-              </div>
-              <div class="d-flex justify-content-center">
-                <div class="layui-form-item">
-                  <div class="layui-input-block">
-                    <button class="layui-btn px-5" lay-submit lay-filter="formDemo">确认</button>
-                  </div>
-                </div>
-                <div class="layui-form-item">
-                  <div class="layui-input-block">
-                    <button type="reset" class="layui-btn px-5 layui-btn-primary">重置</button>
-                  </div>
-                </div>
-              </div>
-            </form>
-          `,
-          success: function() {
-              var form = layui.form;
-              form.render()
-              layui.laydate.render({
-                elem: '[name="createtime"]',
-                value: obj.data.createtime
-              })
-              layui.laydate.render({
-                elem: '[name="finishtime"]',
-                value: obj.data.finishtime
+          content:$('.modal')
+          // `
+          //   <form class="layui-form mt-4" action="/order/update" method="post">
+          //     <input type="hidden" name="id" value="${obj.data.id}">
+          //     <div class="d-flex justify-content-center">
+          //       <div class="layui-form-item w-40">
+          //         <label class="layui-form-label">名称</label>
+          //         <div class="layui-input-block">
+          //           <input type="text" value=${obj.data.name} name="name" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+          //         </div>
+          //       </div>
+          //       <div class="layui-form-item w-40">
+          //         <label class="layui-form-label">创建时间</label>
+          //         <div class="layui-input-block">
+          //           <input type="text" class="layui-input" name="createtime" value="${formatDate(obj.data.createtime,"YYYY-MM-DD")}" autocomplete="off" data-target="datepicker">
+          //         </div>
+          //       </div>
+          //     </div>
+          //     <div class="d-flex justify-content-center">
+          //       <div class="layui-form-item w-40">
+          //         <label class="layui-form-label">创建状态</label>
+          //         <div class="layui-input-block">
+          //           <input type="radio" name="finished" value="1" title="是" ${obj.data.finished === '是' ? 'checked' : ''}>
+          //           <input type="radio" name="finished" value="0" title="否" ${obj.data.finished === '否' ? 'checked' : ''}>
+          //         </div>
+          //       </div>
+          //       <div class="layui-form-item w-40">
+          //         <label class="layui-form-label">完成时间</label>
+          //         <div class="layui-input-block">
+          //           <input type="text" class="layui-input" name="finishtime" value="${formatDate(obj.data.finishtime,"YYYY-MM-DD")}" autocomplete="off" data-target="datepicker1">
+          //         </div>
+          //       </div>
+          //     </div>
+          //     <div class="d-flex justify-content-center">
+          //       <div class="layui-form-item w-40">
+          //         <label class="layui-form-label">订单利润</label>
+          //         <div class="layui-input-block">
+          //           <input type="text" value=${obj.data.profit} name="profit" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+          //         </div>
+          //       </div>
+          //       <div class="layui-form-item w-40">
+          //         <label class="layui-form-label">订单类型</label>
+          //         <div class="layui-input-block">
+          //           <select name="type" lay-verify="">
+          //             <option value="0" ${obj.data.type=="入账"?'selected':''}>入账</option>
+          //             <option value="1" ${obj.data.type=="出账"?'selected':''}>出账</option>
+          //             <option value="2" ${obj.data.type=="记账"?'selected':''}>记账</option>
+          //           </select>     
+          //         </div>
+          //       </div>
+          //     </div>
+          //     <div class="d-flex justify-content-center">
+          //       <div class="layui-form-item w-80">
+          //         <label class="layui-form-label">备注</label>
+          //         <div class="layui-input-block">
+          //           <textarea name="remake" placeholder="请输入内容" class="layui-textarea">${obj.data.remake} </textarea>
+          //         </div>
+          //       </div>
+          //     </div>
+          //     <div class="d-flex justify-content-center">
+          //       <div class="layui-form-item">
+          //         <div class="layui-input-block">
+          //           <button class="layui-btn px-5" lay-submit lay-filter="formDemo">确认</button>
+          //         </div>
+          //       </div>
+          //       <div class="layui-form-item">
+          //         <div class="layui-input-block">
+          //           <button type="reset" class="layui-btn px-5 layui-btn-primary">重置</button>
+          //         </div>
+          //       </div>
+          //     </div>
+          //   </form>
+          // `,
+          ,success: function() {
+              // var form = layui.form;
+              // form.render()
+              // layui.laydate.render({
+              //   elem: '[name="createtime"]',
+              //   value: obj.data.createtime
+              // })
+              // layui.laydate.render({
+              //   elem: '[name="finishtime"]',
+              //   value: obj.data.finishtime
+              // })
+              $.fillForm({
+                data:obj.data,
+                url:'/order/update',
+
               })
           }
         })
