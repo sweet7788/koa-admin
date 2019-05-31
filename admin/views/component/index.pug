@@ -1,0 +1,21 @@
+extends ../layout
+
+block css
+    link(rel="stylesheet", href="/layui/css/layui.css")
+    link(rel="stylesheet", href="/stylesheets/main/main.css")
+    script var config= !{JSON.stringify(tree)}
+block content
+    div(class="d-flex mh-100")
+        ul(class="layui-nav layui-nav-tree mh-100")
+            each item in tree
+                li(class=pathname.indexOf(item.type)!==-1? "layui-nav-item layui-nav-itemed":"layui-nav-item")  
+                    a(href="#")=item.name
+                    if item.children
+                    dl(class="layui-nav-child")
+                        each child in item.children
+                            dd 
+                                a(href=child.href class=pathname.indexOf(child.href)!==-1?'layui-this':'')=child.name
+        block tree_content
+block js
+    script(src="/javascripts/util/fillForm.js")
+    script(src="/javascripts/main/index.js")

@@ -19,7 +19,7 @@ layui.use('table',function(){
   table.render({
     elem: '#demo'
     ,height: window.innerHeight-50
-    ,url: '/main/orderInto' //数据接口
+    ,url: '/bill/into' //数据接口
     ,method: 'post'
     ,parseData:function(res) {
 
@@ -62,16 +62,7 @@ layui.use('table',function(){
     ,defaultToolbar:[
       'filter', 'exports','point'
     ]
-    ,cols: [[ //表头
-       {type:'checkbox'}
-      ,{field: 'name', title: '订单名称', width:100}
-      ,{field: 'createtime', title: '创建时间', width:100, sort: true}
-      ,{field: 'finished_text', title: '是否结束', width:100} 
-      ,{field: 'finishtime', title: '结束时间', width: 177, sort: true}
-      ,{field: 'profit', title: '盈利', width: 100, sort: true}
-      ,{field: 'type', title: '类型', width: 100, sort: true}
-      ,{field: 'remake', title: '备注', width: 200,}
-    ]]
+    ,cols: config.cols
     ,done:function(){
        
     }
@@ -86,7 +77,7 @@ layui.use('table',function(){
             success: function() {
                 $.fillForm({
                   data:{},
-                  url:'/order/add',
+                  url:'/bill/add',
 
                 })
             },
@@ -97,7 +88,7 @@ layui.use('table',function(){
         var id = (table.checkStatus('demo').data.map(ele=>ele.id))
 
         $.ajax({
-          url:'/order/delete',
+          url:'/bill/delete',
           data:{
             id:id
           },
@@ -113,8 +104,8 @@ layui.use('table',function(){
     };
   });
   table.on('rowDouble(orderInto)', function(obj){ //注：edit是固定事件名，test是table原始容器的属性 lay-filter="对应的值"
-        obj.data //所在行的所有相关数据  
-    
+        // obj.data 所在行的所有相关数据  
+        console.log(obj.data)
         var layer = layui.layer
       
         layer.open({
@@ -125,7 +116,7 @@ layui.use('table',function(){
           success: function() {
               $.fillForm({
                 data:obj.data,
-                url:'/order/update',
+                action:'/bill/update',
 
               })
           }

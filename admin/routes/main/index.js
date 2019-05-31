@@ -2,32 +2,35 @@ const SqlHelper = require('../../model/sqlHelper')
 
 const table_orders = new SqlHelper('orders')
 
+const webConfig = require('../../config/config')
 module.exports = [
     {
-        name: '/main/orderOut',
+        name: '/bill/out',
         type: 'get',
         method: async(ctx,next)=>{
             console.log('aaa')
-            await ctx.render('main/order_out',{
-                pathname:'orderOut'
+            await ctx.render('component/order_out',{
+                pathname:'billout',
+                tree:webConfig.tree
             })            
         },
     },{
-        name: '/main/orderInto',
+        name: '/bill/into',
         type: 'get',
         method: async(ctx,next)=>{
-            await ctx.render('main/order_in',{
+            await ctx.render('component/tablePage',{
                 head:{
                     name:'名称',
                     time:'时间',
                     price:'价格'
                 },
-                pathname:'orderInto'
+                pathname:'billinto',
+                tree:webConfig.tree
             })   
         },
     },
     {
-        name: '/main/orderInto',
+        name: '/bill/into',
         type: 'post',
         method: async(ctx,next)=>{
             var res = await table_orders.select()
@@ -42,7 +45,7 @@ module.exports = [
         },
     },
     {
-        name: '/order/update',
+        name: '/bill/update',
         type: 'post',
         method: async(ctx,next)=>{
             var param = ctx.request.body
@@ -60,11 +63,11 @@ module.exports = [
                     remake:param.remake
                 }
             })
-            ctx.redirect('/main/orderInto')
+            ctx.redirect('/bill/into')
         }
     },
     {   
-        name: '/order/add',
+        name: '/bill/add',
         type: 'post',
         method: async(ctx,next)=>{
             var param = ctx.request.body
@@ -79,11 +82,11 @@ module.exports = [
                     remake:param.remake
                 }
             })
-            ctx.redirect('/main/orderInto')
+            ctx.redirect('/bill/into')
         }
     },
     {   
-        name: '/order/delete',
+        name: '/bill/delete',
         type: 'post',
         method: async(ctx,next)=>{
             var param = ctx.request.body

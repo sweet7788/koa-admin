@@ -9,7 +9,7 @@ module.exports = [
           title: 'aaa'
         })
       }else{
-        await ctx.redirect('/main',{
+        await ctx.redirect('/bill',{
 
         })
       }
@@ -61,7 +61,7 @@ module.exports = [
         })
     }
   },{
-    name:'/main',
+    name:'/bill',
     type:'get',
     method:async (ctx, next) =>{
       if(!ctx.cookies.get("tooken")){
@@ -69,7 +69,7 @@ module.exports = [
           title: 'aaa'
         })
       }else{
-        await ctx.redirect('/main/orderInto',{
+        await ctx.redirect('/bill/into',{
           title: 'aaa'
         })
       }
