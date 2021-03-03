@@ -27,7 +27,7 @@
     "koa-views": "^5.2.1",
     "layui": "^0.0.1",
     "promise-mysql": "^3.3.1",
-    "pug": "^2.0.0-rc.1",
+    "pug": "^3.0.1",
     "stylus": "^0.54.5",
     "webpack-hot-middleware": "^2.25.0"
   },
