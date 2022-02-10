@@ -529,11 +529,7 @@ concat-map@0.0.1:
 
 concurrently@^4.1.0:
   version "4.1.0"
-<<<<<<< HEAD
-  resolved "https://registry.npm.taobao.org/concurrently/download/concurrently-4.1.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fconcurrently%2Fdownload%2Fconcurrently-4.1.0.tgz#17fdf067da71210685d9ea554423ef239da30d33"
-=======
   resolved "https://registry.npm.taobao.org/concurrently/download/concurrently-4.1.0.tgz#17fdf067da71210685d9ea554423ef239da30d33"
->>>>>>> ba56f1414ce68ff881f342226a8976d30afa2fc2
   integrity sha1-F/3wZ9pxIQaF2epVRCPvI52jDTM=
   dependencies:
     chalk "^2.4.1"
@@ -909,11 +905,7 @@ fill-range@^4.0.0:
 
 find-up@^3.0.0:
   version "3.0.0"
-<<<<<<< HEAD
-  resolved "https://registry.npm.taobao.org/find-up/download/find-up-3.0.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ffind-up%2Fdownload%2Ffind-up-3.0.0.tgz#49169f1d7993430646da61ecc5ae355c21c97b73"
-=======
   resolved "https://registry.npm.taobao.org/find-up/download/find-up-3.0.0.tgz#49169f1d7993430646da61ecc5ae355c21c97b73"
->>>>>>> ba56f1414ce68ff881f342226a8976d30afa2fc2
   integrity sha1-SRafHXmTQwZG2mHsxa41XCHJe3M=
   dependencies:
     locate-path "^3.0.0"
@@ -3045,11 +3037,9 @@ uid-safe@^2.1.3:
     random-bytes "~1.0.0"
 
 undefsafe@^2.0.2:
-  version "2.0.2"
-  resolved "http://registry.npm.taobao.org/undefsafe/download/undefsafe-2.0.2.tgz#225f6b9e0337663e0d8e7cfd686fc2836ccace76"
-  integrity sha1-Il9rngM3Zj4Njnz9aG/Cg2zKznY=
-  dependencies:
-    debug "^2.2.0"
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/undefsafe/-/undefsafe-2.0.5.tgz#38733b9327bdcd226db889fb723a6efd162e6e2c"
+  integrity sha512-WxONCrssBM8TSPRqN5EmsjVrsv4A8X12J4ArBiiayv3DyyG3ZlIg6yysuuSYdZsVz3TKcTg2fd//Ujd4CHV1iA==
 
 union-value@^1.0.0:
   version "1.0.0"
@@ -3260,11 +3250,7 @@ yallist@^3.0.0, yallist@^3.0.2:
 
 yargs-parser@^11.1.1:
   version "11.1.1"
-<<<<<<< HEAD
-  resolved "https://registry.npm.taobao.org/yargs-parser/download/yargs-parser-11.1.1.tgz#879a0865973bca9f6bab5cbdf3b1c67ec7d3bcf4"
-=======
   resolved "https://registry.npm.taobao.org/yargs-parser/download/yargs-parser-11.1.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fyargs-parser%2Fdownload%2Fyargs-parser-11.1.1.tgz#879a0865973bca9f6bab5cbdf3b1c67ec7d3bcf4"
->>>>>>> ba56f1414ce68ff881f342226a8976d30afa2fc2
   integrity sha1-h5oIZZc7yp9rq1y987HGfsfTvPQ=
   dependencies:
     camelcase "^5.0.0"
@@ -3272,11 +3258,7 @@ yargs-parser@^11.1.1:
 
 yargs@^12.0.1:
   version "12.0.5"
-<<<<<<< HEAD
-  resolved "https://registry.npm.taobao.org/yargs/download/yargs-12.0.5.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fyargs%2Fdownload%2Fyargs-12.0.5.tgz#05f5997b609647b64f66b81e3b4b10a368e7ad13"
-=======
   resolved "https://registry.npm.taobao.org/yargs/download/yargs-12.0.5.tgz#05f5997b609647b64f66b81e3b4b10a368e7ad13"
->>>>>>> ba56f1414ce68ff881f342226a8976d30afa2fc2
   integrity sha1-BfWZe2CWR7ZPZrgeO0sQo2jnrRM=
   dependencies:
     cliui "^4.0.0"
